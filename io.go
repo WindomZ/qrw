@@ -1,6 +1,9 @@
 package qrw
 
-import "io"
+import (
+	"io"
+	"io/ioutil"
+)
 
 // line break
 var lf = []byte("\n")
@@ -18,4 +21,11 @@ func (w *Writer) Write(p []byte) (err error) {
 	}
 	_, err = w.Writer.Write(p)
 	return
+}
+
+// WriteFile writes data to a file named by filename.
+// If the file does not exist, WriteFile creates it with permissions perm;
+// otherwise WriteFile truncates it before writing.
+func (w *Writer) WriteFile(filename string, data []byte) error {
+	return ioutil.WriteFile(filename, data, 0666)
 }

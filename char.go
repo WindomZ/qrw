@@ -6,7 +6,7 @@ import (
 	"github.com/rsc/qr"
 )
 
-// Use Unicode Block Elements to form the QR Code
+// Use Unicode Block Elements to form the QR Code.
 var (
 	blockBB = []byte(" ")
 	blockWB = []byte("▀")
@@ -14,7 +14,8 @@ var (
 	blockWW = []byte("█")
 )
 
-// HalfBlockWriter implements QR Writer by Unicode Block Elements.
+// HalfBlockWriter implements QR Writer use Unicode Block Elements,
+// output to text.
 type HalfBlockWriter struct {
 	Writer
 	BlockBB []byte
@@ -102,7 +103,7 @@ func (w *HalfBlockWriter) QR(text string) error {
 	return w.writeBlocks(code)
 }
 
-// NewHalfBlockWriter returns a HalfBlockWriter instance that can write QR Code.
+// NewHalfBlockWriter returns a HalfBlockWriter instance after initialization.
 func NewHalfBlockWriter(l Level, w io.Writer) *HalfBlockWriter {
 	return &HalfBlockWriter{
 		Writer: Writer{

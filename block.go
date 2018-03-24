@@ -6,13 +6,14 @@ import (
 	"github.com/rsc/qr"
 )
 
-// Use two Unicode characters to form the QR Code
+// Use two Unicode characters to form the QR Code.
 var (
 	blockB = []byte("  ")
 	blockW = []byte("██")
 )
 
-// BlockWriter implements QR Writer by Unicode characters.
+// BlockWriter implements QR Writer use Unicode characters,
+// output to text.
 type BlockWriter struct {
 	Writer
 	BlockB []byte
@@ -81,7 +82,7 @@ func (w *BlockWriter) QR(text string) error {
 	return w.writeBlocks(code)
 }
 
-// NewBlockWriter returns a BlockWriter instance that can write QR Code.
+// NewBlockWriter returns a BlockWriter instance after initialization.
 func NewBlockWriter(l Level, w io.Writer) *BlockWriter {
 	return &BlockWriter{
 		Writer: Writer{

@@ -8,13 +8,14 @@ import (
 	"github.com/rsc/qr"
 )
 
-// Use two Unicode characters to form the QR Code
+// Use two Unicode characters to form the QR Code.
 var (
 	blockBashB = []byte("\033[47;30m  \033[0m")
 	blockBashW = []byte("\033[40;37m  \033[0m")
 )
 
-// BashWriter implements QR Writer by 'echo' command.
+// BashWriter implements QR Writer by 'echo' command,
+// output to terminal stdout.
 type BashWriter struct {
 	Writer
 	Buffer *bytes.Buffer
@@ -102,7 +103,7 @@ func (w *BashWriter) QR(text string) error {
 	return w.writeBlocks(code)
 }
 
-// NewBashWriter returns a BashWriter instance that can write QR Code.
+// NewBashWriter returns a BashWriter instance after initialization.
 func NewBashWriter(l Level, w io.Writer) *BashWriter {
 	return &BashWriter{
 		Writer: Writer{
