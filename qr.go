@@ -24,7 +24,7 @@ const (
 )
 
 // QuietZoneBlocks is the number of QR quiet zone blocks
-const QuietZoneBlocks = 4
+var QuietZoneBlocks = 4
 
 // CharWrite a QR Code with Unicode Block Elements and write to io.Writer
 func CharWrite(w io.Writer, l Level, text string) error {
@@ -35,6 +35,20 @@ func CharWrite(w io.Writer, l Level, text string) error {
 func CharWriteFile(path string, l Level, text string) error {
 	w := &bytes.Buffer{}
 	if err := NewHalfBlockWriter(l, w).QR(text); err != nil {
+		return err
+	}
+	return ioutil.WriteFile(path, w.Bytes(), 0666)
+}
+
+// BlockWrite a QR Code with Unicode characters and write to io.Writer
+func BlockWrite(w io.Writer, l Level, text string) error {
+	return NewBlockWriter(l, w).QR(text)
+}
+
+// BlockWriteFile a QR Code with Unicode characters and write to file with path.
+func BlockWriteFile(path string, l Level, text string) error {
+	w := &bytes.Buffer{}
+	if err := NewBlockWriter(l, w).QR(text); err != nil {
 		return err
 	}
 	return ioutil.WriteFile(path, w.Bytes(), 0666)
