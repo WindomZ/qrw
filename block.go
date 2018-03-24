@@ -12,7 +12,7 @@ var (
 	blockW = []byte("██")
 )
 
-// BlockWriter implements QR Writer by two Unicode characters.
+// BlockWriter implements QR Writer by Unicode characters.
 type BlockWriter struct {
 	Writer
 	BlockB []byte
