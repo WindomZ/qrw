@@ -30,3 +30,8 @@ func TestBlockWriteFile(t *testing.T) {
 func TestBash(t *testing.T) {
 	assert.NoError(t, Bash(L, "https://github.com/WindomZ/qrw"))
 }
+
+func TestPNG(t *testing.T) {
+	assert.NoError(t, PNG("file_qr.png", L, "https://github.com/WindomZ/qrw"))
+	assert.Error(t, PNG("test/file_qr.png", L, "https://github.com/WindomZ/qrw"))
+}

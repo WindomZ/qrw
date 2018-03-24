@@ -33,14 +33,14 @@ func CharWrite(w io.Writer, l Level, text string) error {
 	return NewHalfBlockWriter(l, w).QR(text)
 }
 
-// CharWriteFile generates a QR Code with Unicode Block Elements and output to file with path.
+// CharWriteFile generates a QR Code with Unicode Block Elements and output to a file named by filename.
 // Half character as a QR block.
-func CharWriteFile(path string, l Level, text string) error {
+func CharWriteFile(filename string, l Level, text string) error {
 	w := &bytes.Buffer{}
 	if err := NewHalfBlockWriter(l, w).QR(text); err != nil {
 		return err
 	}
-	return ioutil.WriteFile(path, w.Bytes(), 0666)
+	return ioutil.WriteFile(filename, w.Bytes(), 0666)
 }
 
 // BlockWrite generates a QR Code with Unicode characters and output to io.Writer.
@@ -49,18 +49,23 @@ func BlockWrite(w io.Writer, l Level, text string) error {
 	return NewBlockWriter(l, w).QR(text)
 }
 
-// BlockWriteFile generates a QR Code with Unicode characters and output to file with path.
+// BlockWriteFile generates a QR Code with Unicode characters and output to a file named by filename.
 // Two characters as a QR block.
-func BlockWriteFile(path string, l Level, text string) error {
+func BlockWriteFile(filename string, l Level, text string) error {
 	w := &bytes.Buffer{}
 	if err := NewBlockWriter(l, w).QR(text); err != nil {
 		return err
 	}
-	return ioutil.WriteFile(path, w.Bytes(), 0666)
+	return ioutil.WriteFile(filename, w.Bytes(), 0666)
 }
 
 // Bash generates a QR Code with bash color and output to Unix shell.
 // Two characters as a QR block.
 func Bash(l Level, text string) error {
 	return NewBashWriter(l, os.Stdout).QR(text)
+}
+
+// PNG generates a QR Code and output to a PNG image file named by filename.
+func PNG(filename string, l Level, text string) error {
+	return NewPNGWriter(l).QRFile(filename, text)
 }
