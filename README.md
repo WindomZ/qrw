@@ -15,7 +15,7 @@
   - [x] zsh
 - [x] Output to file
   - [x] text
-  - [ ] png
+  - [x] png
   - [ ] jpg
 
 ## Example
@@ -57,7 +57,10 @@ func BlockWriteFile(string, Level, string) error
 func CharWrite(io.Writer, Level, string) error
 func CharWriteFile(string, Level, string) error
 func Bash(Level, string) error
+func PNG(string, Level, string) error
 ```
+
+See [document](https://godoc.org/github.com/WindomZ/qrw).
 
 ### Level(error correction level)
 From least to most tolerant of errors:
