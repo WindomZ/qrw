@@ -2,14 +2,21 @@
 
 > A golang library for outputting QR codes
 
+[![Build Status](https://travis-ci.org/WindomZ/qrw.svg?branch=master)](https://travis-ci.org/WindomZ/qrw)
+[![Coverage Status](https://coveralls.io/repos/github/WindomZ/qrw/badge.svg?branch=master)](https://coveralls.io/github/WindomZ/qrw?branch=master)
+[![GoDoc](https://godoc.org/github.com/WindomZ/qrw?status.svg)](https://godoc.org/github.com/WindomZ/qrw)
+
 ## Features
-- [x] Output to character
-  - [x] half character as a block
+- [x] Output to text
   - [x] two characters as a block
+  - [x] half character as a block
 - [x] Output to terminal
+  - [x] bash
+  - [x] zsh
 - [x] Output to file
-  - [x] characters
+  - [x] text
   - [ ] png
+  - [ ] jpg
 
 ## Example
 As shown in the figure, you can get started quickly with the following example:
@@ -49,6 +56,7 @@ func BlockWrite(io.Writer, Level, string) error
 func BlockWriteFile(string, Level, string) error
 func CharWrite(io.Writer, Level, string) error
 func CharWriteFile(string, Level, string) error
+func Bash(Level, string) error
 ```
 
 ### Level(error correction level)
