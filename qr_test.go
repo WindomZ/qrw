@@ -26,3 +26,7 @@ func TestBlockWriteFile(t *testing.T) {
 	assert.NoError(t, BlockWriteFile("file_qr_block", L, "https://github.com/WindomZ/qrw"))
 	assert.Error(t, BlockWriteFile("test/file_qr_block", L, "https://github.com/WindomZ/qrw"))
 }
+
+func TestBash(t *testing.T) {
+	assert.NoError(t, Bash(L, "https://github.com/WindomZ/qrw"))
+}

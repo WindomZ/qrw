@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"io"
 	"io/ioutil"
+	"os"
 
 	"github.com/rsc/qr"
 )
@@ -26,12 +27,14 @@ const (
 // QuietZoneBlocks is the number of QR quiet zone blocks
 var QuietZoneBlocks = 4
 
-// CharWrite a QR Code with Unicode Block Elements and write to io.Writer
+// CharWrite generates a QR Code with Unicode Block Elements and output to io.Writer.
+// Half character as a QR block.
 func CharWrite(w io.Writer, l Level, text string) error {
 	return NewHalfBlockWriter(l, w).QR(text)
 }
 
-// CharWriteFile a QR Code with Unicode Block Elements and write to file with path.
+// CharWriteFile generates a QR Code with Unicode Block Elements and output to file with path.
+// Half character as a QR block.
 func CharWriteFile(path string, l Level, text string) error {
 	w := &bytes.Buffer{}
 	if err := NewHalfBlockWriter(l, w).QR(text); err != nil {
@@ -40,16 +43,24 @@ func CharWriteFile(path string, l Level, text string) error {
 	return ioutil.WriteFile(path, w.Bytes(), 0666)
 }
 
-// BlockWrite a QR Code with Unicode characters and write to io.Writer
+// BlockWrite generates a QR Code with Unicode characters and output to io.Writer.
+// Two characters as a QR block.
 func BlockWrite(w io.Writer, l Level, text string) error {
 	return NewBlockWriter(l, w).QR(text)
 }
 
-// BlockWriteFile a QR Code with Unicode characters and write to file with path.
+// BlockWriteFile generates a QR Code with Unicode characters and output to file with path.
+// Two characters as a QR block.
 func BlockWriteFile(path string, l Level, text string) error {
 	w := &bytes.Buffer{}
 	if err := NewBlockWriter(l, w).QR(text); err != nil {
 		return err
 	}
 	return ioutil.WriteFile(path, w.Bytes(), 0666)
+}
+
+// Bash generates a QR Code with bash color and output to Unix shell.
+// Two characters as a QR block.
+func Bash(l Level, text string) error {
+	return NewBashWriter(l, os.Stdout).QR(text)
 }
