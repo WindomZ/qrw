@@ -1,9 +1,7 @@
 package qrw
 
 import (
-	"bytes"
 	"io"
-	"io/ioutil"
 	"os"
 
 	"github.com/rsc/qr"
@@ -36,11 +34,7 @@ func CharWrite(w io.Writer, l Level, text string) error {
 // CharWriteFile generates a QR Code with Unicode Block Elements and output to a file named by filename.
 // Half character as a QR block.
 func CharWriteFile(filename string, l Level, text string) error {
-	w := &bytes.Buffer{}
-	if err := NewHalfBlockWriter(l, w).QR(text); err != nil {
-		return err
-	}
-	return ioutil.WriteFile(filename, w.Bytes(), 0666)
+	return NewHalfBlockWriter(l, nil).QRFile(filename, text)
 }
 
 // BlockWrite generates a QR Code with Unicode characters and output to io.Writer.
@@ -52,11 +46,7 @@ func BlockWrite(w io.Writer, l Level, text string) error {
 // BlockWriteFile generates a QR Code with Unicode characters and output to a file named by filename.
 // Two characters as a QR block.
 func BlockWriteFile(filename string, l Level, text string) error {
-	w := &bytes.Buffer{}
-	if err := NewBlockWriter(l, w).QR(text); err != nil {
-		return err
-	}
-	return ioutil.WriteFile(filename, w.Bytes(), 0666)
+	return NewBlockWriter(l, nil).QRFile(filename, text)
 }
 
 // Bash generates a QR Code with bash color and output to Unix shell.

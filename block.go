@@ -1,6 +1,7 @@
 package qrw
 
 import (
+	"bytes"
 	"io"
 
 	"github.com/rsc/qr"
@@ -80,6 +81,17 @@ func (w *BlockWriter) QR(text string) error {
 		return err
 	}
 	return w.writeBlocks(code)
+}
+
+// QRFile encode text at the given error correction level,
+// and rewrite to a file named by filename.
+func (w *BlockWriter) QRFile(filename, text string) error {
+	buf := &bytes.Buffer{}
+	w.Writer.Writer = buf
+	if err := w.QR(text); err != nil {
+		return err
+	}
+	return w.WriteFile(filename, buf.Bytes())
 }
 
 // NewBlockWriter returns a BlockWriter instance after initialization.
