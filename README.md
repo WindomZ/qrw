@@ -1,19 +1,19 @@
 # QRCode Writer
 
-> A golang library for outputting QR codes
+> Output QR codes for Go
 
 [![Build Status](https://travis-ci.org/WindomZ/qrw.svg?branch=master)](https://travis-ci.org/WindomZ/qrw)
 [![Coverage Status](https://coveralls.io/repos/github/WindomZ/qrw/badge.svg?branch=master)](https://coveralls.io/github/WindomZ/qrw?branch=master)
 [![GoDoc](https://godoc.org/github.com/WindomZ/qrw?status.svg)](https://godoc.org/github.com/WindomZ/qrw)
 
 ## Features
-- [x] Output to text
+- [x] Output to **text**
   - [x] two characters as a block
   - [x] half character as a block
-- [x] Output to terminal
+- [x] Output to **terminal**
   - [x] bash
   - [x] zsh
-- [x] Output to file
+- [x] Output to **file**
   - [x] text
   - [x] png
   - [x] jpeg
@@ -24,7 +24,7 @@ As shown in the figure, you can get started quickly with the following example:
 ![image](https://user-images.githubusercontent.com/14875359/37864413-600aab9a-2fa9-11e8-85ff-9f3c1007bb5f.png)
 
 ### BlockWriter
-Show a QR block by two characters.
+Show a QR block by _two characters_.
 
 ##### Output to `io.Writer`:
 ```
@@ -37,7 +37,7 @@ BlockWriteFile("file_path", L, "Hello world!")
 ```
 
 ### HalfBlockWriter
-Show a QR block by half character.
+Show a QR block by _half character_.
 
 ##### Output to `io.Writer`:
 ```
