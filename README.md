@@ -16,7 +16,7 @@
 - [x] Output to file
   - [x] text
   - [x] png
-  - [ ] jpg
+  - [x] jpeg
 
 ## Example
 As shown in the figure, you can get started quickly with the following example:
@@ -58,6 +58,7 @@ func CharWrite(io.Writer, Level, string) error
 func CharWriteFile(string, Level, string) error
 func Bash(Level, string) error
 func PNG(string, Level, string) error
+func JPEG(string, Level, string) error
 ```
 
 See [document](https://godoc.org/github.com/WindomZ/qrw).
