@@ -35,3 +35,8 @@ func TestPNG(t *testing.T) {
 	assert.NoError(t, PNG("file_qr.png", L, "https://github.com/WindomZ/qrw"))
 	assert.Error(t, PNG("test/file_qr.png", L, "https://github.com/WindomZ/qrw"))
 }
+
+func TestJPEG(t *testing.T) {
+	assert.NoError(t, JPEG("file_qr.jpeg", L, "https://github.com/WindomZ/qrw"))
+	assert.Error(t, JPEG("test/file_qr.jpeg", L, "https://github.com/WindomZ/qrw"))
+}

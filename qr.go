@@ -59,3 +59,8 @@ func Bash(l Level, text string) error {
 func PNG(filename string, l Level, text string) error {
 	return NewPNGWriter(l).QRFile(filename, text)
 }
+
+// JPEG generates a QR Code and output to a JPEG image file named by filename.
+func JPEG(filename string, l Level, text string) error {
+	return NewJPEGWriter(l).QRFile(filename, text)
+}
