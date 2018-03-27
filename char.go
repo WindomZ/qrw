@@ -67,15 +67,15 @@ func (w *HalfBlockWriter) writeBlocks(code *qr.Code) error {
 	var block uint8
 	var bottom bool
 	w.writeTopQuietZone(code.Size)
-	for i := 0; i <= code.Size; i += 2 {
+	for y := 0; y <= code.Size; y += 2 {
 		w.writeLeftQuietZone()
-		bottom = i+1 < code.Size
-		for j := 0; j <= code.Size; j++ {
+		bottom = y+1 < code.Size
+		for x := 0; x <= code.Size; x++ {
 			block = 0
-			if code.Black(i, j) {
+			if code.Black(x, y) {
 				block |= 1 << 1
 			}
-			if bottom && code.Black(i+1, j) {
+			if bottom && code.Black(x, y+1) {
 				block |= 1
 			}
 			switch block {

@@ -78,10 +78,10 @@ func (w *BashWriter) writeRightQuietZone() error {
 
 func (w *BashWriter) writeBlocks(code *qr.Code) error {
 	w.writeTopQuietZone(code.Size)
-	for i := 0; i <= code.Size; i++ {
+	for y := 0; y <= code.Size; y++ {
 		w.writeLeftQuietZone()
-		for j := 0; j <= code.Size; j++ {
-			if code.Black(i, j) {
+		for x := 0; x <= code.Size; x++ {
+			if code.Black(x, y) {
 				w.Write(w.BlockB)
 			} else {
 				w.Write(w.BlockW)
