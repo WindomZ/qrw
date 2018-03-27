@@ -21,7 +21,7 @@
 ## Example
 As shown in the figure, you can get started quickly with the following example:
 
-![image](https://user-images.githubusercontent.com/14875359/37864413-600aab9a-2fa9-11e8-85ff-9f3c1007bb5f.png)
+![image](https://user-images.githubusercontent.com/14875359/37985673-04e85e8a-322c-11e8-882e-dc8b49d215c7.png)
 
 ### BlockWriter
 Show a QR block by _two characters_.
