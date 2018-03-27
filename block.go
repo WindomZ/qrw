@@ -22,10 +22,10 @@ type BlockWriter struct {
 }
 
 func (w *BlockWriter) writeTopQuietZone(size int) (err error) {
-	width := size + QuietZoneBlocks*2
-	for i := 0; err == nil && i < 4; i++ {
-		for i := 0; i < width; i++ {
-			w.Write(w.BlockW)
+	width := size + w.QuietZone*2
+	for i := 0; err == nil && i < w.QuietZone; i++ {
+		for i := 0; err == nil && i < width; i++ {
+			err = w.Write(w.BlockW)
 		}
 		err = w.Write(lf)
 	}
@@ -33,10 +33,10 @@ func (w *BlockWriter) writeTopQuietZone(size int) (err error) {
 }
 
 func (w *BlockWriter) writeBottomQuietZone(size int) (err error) {
-	width := size + QuietZoneBlocks*2
-	for i := 1; err == nil && i < 4; i++ {
-		for i := 0; i < width; i++ {
-			w.Write(w.BlockW)
+	width := size + w.QuietZone*2
+	for i := 1; err == nil && i < w.QuietZone; i++ {
+		for i := 0; err == nil && i < width; i++ {
+			err = w.Write(w.BlockW)
 		}
 		err = w.Write(lf)
 	}
@@ -44,20 +44,22 @@ func (w *BlockWriter) writeBottomQuietZone(size int) (err error) {
 }
 
 func (w *BlockWriter) writeLeftQuietZone() (err error) {
-	for i := 0; i < QuietZoneBlocks; i++ {
+	for i := 0; err == nil && i < w.QuietZone; i++ {
 		err = w.Write(w.BlockW)
 	}
 	return
 }
 
-func (w *BlockWriter) writeRightQuietZone() error {
-	for i := 1; i < QuietZoneBlocks; i++ {
-		w.Write(w.BlockW)
+func (w *BlockWriter) writeRightQuietZone() (err error) {
+	for i := 1; err == nil && i < w.QuietZone; i++ {
+		err = w.Write(w.BlockW)
 	}
-	return w.Write(lf)
+	err = w.Write(lf)
+	return
 }
 
 func (w *BlockWriter) writeBlocks(code *qr.Code) error {
+	w.init()
 	w.writeTopQuietZone(code.Size)
 	for y := 0; y <= code.Size; y++ {
 		w.writeLeftQuietZone()

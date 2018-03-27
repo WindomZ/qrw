@@ -10,8 +10,17 @@ var lf = []byte("\n")
 
 // Writer denotes a basic QR io.Writer.
 type Writer struct {
-	Level  Level
-	Writer io.Writer
+	Level     Level
+	Writer    io.Writer
+	QuietZone int
+}
+
+// initial Writer
+func (w *Writer) init() *Writer {
+	if w.QuietZone <= 0 {
+		w.QuietZone = QuietZoneBlocks
+	}
+	return w
 }
 
 // Write the io.Writer wraps the basic Write method.

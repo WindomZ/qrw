@@ -25,45 +25,68 @@ type HalfBlockWriter struct {
 	BlockWW []byte
 }
 
-func (w *HalfBlockWriter) writeTopQuietZone(size int) error {
-	width := size + QuietZoneBlocks*2
-	for i := 0; i < width; i++ {
-		w.Write(w.BlockWW)
+func (w *HalfBlockWriter) writeTopQuietZone(size int) (err error) {
+	width := size + w.QuietZone*2
+	if w.QuietZone%2 == 0 {
+		for i := 0; err == nil && i < width; i++ {
+			err = w.Write(w.BlockWW)
+		}
+	} else {
+		for i := 0; err == nil && i < width; i++ {
+			err = w.Write(w.BlockBW)
+		}
 	}
-	w.Write(lf)
-	for i := 0; i < width; i++ {
-		w.Write(w.BlockWW)
+	err = w.Write(lf)
+	for j := 3; err == nil && j <= w.QuietZone; j += 2 {
+		for i := 0; err == nil && i < width; i++ {
+			err = w.Write(w.BlockWW)
+		}
+		err = w.Write(lf)
 	}
-	return w.Write(lf)
+	return
 }
 
-func (w *HalfBlockWriter) writeBottomQuietZone(size int) error {
-	width := size + QuietZoneBlocks*2
-	for i := 0; i < width; i++ {
-		w.Write(w.BlockWW)
+func (w *HalfBlockWriter) writeBottomQuietZone(size int) (err error) {
+	if w.QuietZone <= 1 {
+		return nil
 	}
-	w.Write(lf)
-	for i := 0; i < width; i++ {
-		w.Write(w.BlockWB)
+	width := size + w.QuietZone*2
+	for j := 4; err == nil && j <= w.QuietZone; j += 2 {
+		for i := 0; err == nil && i < width; i++ {
+			err = w.Write(w.BlockWW)
+		}
+		err = w.Write(lf)
 	}
-	return w.Write(lf)
+	if w.QuietZone%2 == 0 {
+		for i := 0; err == nil && i < width; i++ {
+			err = w.Write(w.BlockWB)
+		}
+	} else {
+		for i := 0; err == nil && i < width; i++ {
+			err = w.Write(w.BlockWW)
+		}
+	}
+	err = w.Write(lf)
+	return
 }
 
 func (w *HalfBlockWriter) writeLeftQuietZone() (err error) {
-	for i := 0; i < QuietZoneBlocks; i++ {
+	for i := 0; err == nil && i < w.QuietZone; i++ {
 		err = w.Write(w.BlockWW)
 	}
 	return
 }
 
-func (w *HalfBlockWriter) writeRightQuietZone() error {
-	for i := 1; i < QuietZoneBlocks; i++ {
-		w.Write(w.BlockWW)
+func (w *HalfBlockWriter) writeRightQuietZone() (err error) {
+	for i := 1; err == nil && i < w.QuietZone; i++ {
+		err = w.Write(w.BlockWW)
 	}
-	return w.Write(lf)
+	err = w.Write(lf)
+	return
 }
 
 func (w *HalfBlockWriter) writeBlocks(code *qr.Code) error {
+	w.init()
 	var block uint8
 	var bottom bool
 	w.writeTopQuietZone(code.Size)

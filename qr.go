@@ -22,8 +22,8 @@ const (
 	H = Level(qr.H) // 65% redundant
 )
 
-// QuietZoneBlocks is the number of QR quiet zone blocks
-var QuietZoneBlocks = 4
+// QuietZoneBlocks is the default number of QR quiet zone blocks
+const QuietZoneBlocks = 4
 
 // CharWrite generates a QR Code with Unicode Block Elements and output to io.Writer.
 // Half character as a QR block.
