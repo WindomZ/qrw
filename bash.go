@@ -95,6 +95,12 @@ func (w *BashWriter) writeBlocks(code *qr.Code) error {
 	return w.echo()
 }
 
+// Invert invert the color of block.
+func (w *BashWriter) Invert() *BashWriter {
+	w.BlockB, w.BlockW = w.BlockW, w.BlockB
+	return w
+}
+
 // QR encode text at the given error correction level,
 // and write to the given io.Writer.
 func (w *BashWriter) QR(text string) error {

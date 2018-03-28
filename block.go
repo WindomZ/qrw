@@ -75,6 +75,12 @@ func (w *BlockWriter) writeBlocks(code *qr.Code) error {
 	return w.writeBottomQuietZone(code.Size)
 }
 
+// Invert invert the color of block.
+func (w *BlockWriter) Invert() *BlockWriter {
+	w.BlockB, w.BlockW = w.BlockW, w.BlockB
+	return w
+}
+
 // QR encode text at the given error correction level,
 // and write to the given io.Writer.
 func (w *BlockWriter) QR(text string) error {
