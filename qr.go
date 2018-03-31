@@ -55,6 +55,12 @@ func Bash(l Level, text string) error {
 	return NewBashWriter(l, os.Stdout).QR(text)
 }
 
+// HalfBash generates a QR Code with bash color and output to Unix shell.
+// Half character as a QR block.
+func HalfBash(l Level, text string) error {
+	return NewHalfBashWriter(l, os.Stdout).QR(text)
+}
+
 // PNG generates a QR Code and output to a PNG image file named by filename.
 func PNG(filename string, l Level, text string) error {
 	return NewPNGWriter(l).QRFile(filename, text)
