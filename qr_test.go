@@ -7,14 +7,14 @@ import (
 	"github.com/WindomZ/testify/assert"
 )
 
-func TestCharWrite(t *testing.T) {
-	assert.NoError(t, CharWrite(os.Stdout, L, "https://github.com/WindomZ/qrw"))
-	assert.NoError(t, CharWrite(nil, L, "https://github.com/WindomZ/qrw"))
+func TestHalfBlockWrite(t *testing.T) {
+	assert.NoError(t, HalfBlockWrite(os.Stdout, L, "https://github.com/WindomZ/qrw"))
+	assert.NoError(t, HalfBlockWrite(nil, L, "https://github.com/WindomZ/qrw"))
 }
 
-func TestCharWriteFile(t *testing.T) {
-	assert.NoError(t, CharWriteFile("file_qr_half_block", L, "https://github.com/WindomZ/qrw"))
-	assert.Error(t, CharWriteFile("test/file_qr_half_block", L, "https://github.com/WindomZ/qrw"))
+func TestHalfBlockWriteFile(t *testing.T) {
+	assert.NoError(t, HalfBlockWriteFile("file_qr_half_block", L, "https://github.com/WindomZ/qrw"))
+	assert.Error(t, HalfBlockWriteFile("test/file_qr_half_block", L, "https://github.com/WindomZ/qrw"))
 }
 
 func TestBlockWrite(t *testing.T) {

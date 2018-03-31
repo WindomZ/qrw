@@ -41,12 +41,12 @@ Show a QR block by _half character_.
 
 ##### Output to `io.Writer`:
 ```
-CharWrite(os.Stdout, L, "Hello world!")
+HalfBlockWrite(os.Stdout, L, "Hello world!")
 ```
 
 ##### Output to `file`:
 ```
-CharWriteFile("file_path", L, "Hello world!")
+HalfBlockWriteFile("file_path", L, "Hello world!")
 ```
 
 ## Usage
@@ -54,8 +54,8 @@ Common functions:
 ```
 func BlockWrite(io.Writer, Level, string) error
 func BlockWriteFile(string, Level, string) error
-func CharWrite(io.Writer, Level, string) error
-func CharWriteFile(string, Level, string) error
+func HalfBlockWrite(io.Writer, Level, string) error
+func HalfBlockWriteFile(string, Level, string) error
 func Bash(Level, string) error
 func PNG(string, Level, string) error
 func JPEG(string, Level, string) error

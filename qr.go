@@ -25,15 +25,15 @@ const (
 // QuietZoneBlocks is the default number of QR quiet zone blocks
 const QuietZoneBlocks = 4
 
-// CharWrite generates a QR Code with Unicode Block Elements and output to io.Writer.
+// HalfBlockWrite generates a QR Code with Unicode Block Elements and output to io.Writer.
 // Half character as a QR block.
-func CharWrite(w io.Writer, l Level, text string) error {
+func HalfBlockWrite(w io.Writer, l Level, text string) error {
 	return NewHalfBlockWriter(l, w).QR(text)
 }
 
-// CharWriteFile generates a QR Code with Unicode Block Elements and output to a file named by filename.
+// HalfBlockWriteFile generates a QR Code with Unicode Block Elements and output to a file named by filename.
 // Half character as a QR block.
-func CharWriteFile(filename string, l Level, text string) error {
+func HalfBlockWriteFile(filename string, l Level, text string) error {
 	return NewHalfBlockWriter(l, nil).QRFile(filename, text)
 }
 
